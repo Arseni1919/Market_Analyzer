@@ -1,4 +1,3 @@
-from datetime import datetime, timedelta
 from globals import *
 import streamlit as st
 
@@ -68,7 +67,7 @@ def main():
     last_time_frame = st.sidebar.selectbox(
         'Last...',
         ('Hour', 'Day', 'Month', '3 Months', '6 Months', 'Year'),
-        disabled=time_period_option!='last_time_frame'
+        disabled=time_period_option!='last_time_frame',
     )
     from_time_sidebar = st.sidebar.date_input(
         label='From DateTime',
@@ -77,6 +76,10 @@ def main():
     )
     x_as_time = st.sidebar.checkbox('X as Time')
 
+
+    st.metric('Profit Metric', '0', delta='100', delta_color="normal", help=None)
+
+    st.write(f'## The {stock_option} Stock Graph')
     from_time_final = get_from_time_final(time_period_option, last_time_frame, from_time_sidebar)
     stock_data_df = get_data(from_time_final, stock_option)
     # st.dataframe(stock_data_df)
